@@ -1,0 +1,61 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+@font-face {
+  font-family: 'Supabase Circular';
+  src: url('/assets/fonts/custom/CustomFont-Book.woff2') format('woff2'),
+       url('/assets/fonts/custom/CustomFont-Book.woff')  format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Supabase Circular';
+  src: url('/assets/fonts/custom/CustomFont-Black.woff2') format('woff2'),
+       url('/assets/fonts/custom/CustomFont-Black.woff')  format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ====== Global Layout & Font ====== */
+html, body, label {
+  font-family: 'Supabase Circular', sans-serif;
+  font-weight: 300;
+}
+
+html, body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    line-height: 1.5;
+}
+@supports not selector(::-webkit-scrollbar) {
+  html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--thumb-color) var(--track-color);
+  }
+}
+a {
+   text-decoration: none;
+}
+.selected {
+	background-color: white;
+	fill-opacity: 50;
+}
+
+::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 30px;
+}

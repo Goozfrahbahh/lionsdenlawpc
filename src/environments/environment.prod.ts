@@ -1,0 +1,8 @@
+export const environment = {
+  production: false,
+  supabaseKey:
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9hdmdkYmVjdG1rdHhjeWJuc3d5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDAwNjAyMDAsImV4cCI6MjA1NTYzNjIwMH0.LcEqYg_QHtn2N7yoWYr6pvIDq7Ps_RIS133R7QQHDmw',
+  supabaseUrl: 'https://oavgdbectmktxcybnswy.supabase.co',
+  mondayApiToken:
+  'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjQwOTA3NTI3NiwiYWFpIjoxMSwidWlkIjo1NTkwNjk2OSwiaWFkIjoiMjAyNC0wOS0xMVQwNDoyNjowMC41MzdaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTUyNjU3NzgsInJnbiI6InVzZTEifQ.hbFKjbPlO4gVEpACJEuBmEvpPDxrII7UQ1m_dVSINO0',
+};
