@@ -41,7 +41,7 @@ type VerdictItem = {
     </header>
 
     <!-- HERO / PANEL -->
-    <section class="w-full bg-whit -mt-5 px-4">
+    <section class="w-full bg-whit -mt-5">
       <div class=" mx-auto py-10">
         <div class="bg-[#e9f1ff] rounded-2xl p-8 md:p-10">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mt-4">
