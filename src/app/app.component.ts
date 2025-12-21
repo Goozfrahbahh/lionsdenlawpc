@@ -812,7 +812,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         // stop observing after trigger
         this.howObserver?.disconnect();
       },
-      { threshold: 0.2 } // triggers when ~20% of the section is visible
+      { threshold: 0.6 } // triggers when ~20% of the section is visible
     );
 
     this.howObserver.observe(this.howItWorksSection.nativeElement);
