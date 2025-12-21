@@ -24,7 +24,7 @@ type VerdictItem = {
         <!-- LEFT: LOGO PLACEHOLDER -->
         <div class="flex items-center gap-3">
           <div
-            class="sm:w-[30px] w-[170px] h-[34px] bg-black/10 rounded flex items-center justify-center text-[11px] text-black/60 font-semibold"
+            class="sm:w-[30px] md:w-[170px] h-[34px] bg-black/10 rounded flex items-center justify-center text-[11px] text-black/60 font-semibold"
           >
             LOGO
           </div>
