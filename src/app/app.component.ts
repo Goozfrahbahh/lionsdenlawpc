@@ -19,7 +19,7 @@ type VerdictItem = {
     <!-- HEADER -->
     <header class="w-full bg-[#f8f9fc]">
       <div
-        class="max-w-7xl mx-auto px-6 h-[107px] flex items-center justify-between"
+        class="max-w-8xl mx-auto px-6 h-[107px] flex items-center justify-between"
       >
         <!-- LEFT: LOGO PLACEHOLDER -->
         <div class="flex items-center">
@@ -33,7 +33,7 @@ type VerdictItem = {
         <!-- RIGHT: PHONE -->
         <a
           href="tel:+15122287031"
-          class="phone-link text-[27px] md:text-[27px] font-extrabold tracking-wide text-black"
+          class="phone-link text-[27px] md:text-[27px] font-extrabold tracking-wide text-black mr-4"
         >
           (512) 228-7031
         </a>
@@ -837,3 +837,4 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     console.log('Lead submitted', this.model);
   }
 }
+
