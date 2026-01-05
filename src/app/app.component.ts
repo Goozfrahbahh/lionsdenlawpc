@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 // ✅ ADD THESE IMPORTS at the top of your component file
 import { AfterViewInit, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 
+import { SupabaseService } from './services/supabase.service';
+
 type CaseTypeOption = { value: string; label: string };
 
 type VerdictItem = {
@@ -207,9 +209,28 @@ type VerdictItem = {
 
                 <!-- CTA (gold/black style) -->
                 <div class="flex justify-center pt-1">
-                  <button type="submit" class="cta-btn">
-                    Start your claim
+                  <button
+                    type="submit"
+                    class="cta-btn"
+                    [disabled]="isSubmitting"
+                  >
+                    {{ isSubmitting ? 'Submitting...' : 'Start your claim' }}
                   </button>
+
+                  <p
+                    *ngIf="submitError"
+                    class="text-[12px] text-red-600 leading-4 text-center mt-2"
+                  >
+                    {{ submitError }}
+                  </p>
+
+                  <p
+                    *ngIf="submitSuccess"
+                    class="text-[12px] text-green-700 leading-4 text-center mt-2"
+                  >
+                    Thanks — your request has been received. We’ll be in touch
+                    shortly.
+                  </p>
                 </div>
 
                 <p class="text-[11px] text-[#0b0f16]/60 leading-4 text-center">
@@ -733,6 +754,10 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   private howObserver?: IntersectionObserver;
   private howTriggered = false;
 
+  isSubmitting = false;
+  submitSuccess = false;
+  submitError: string | null = null;
+
   model = {
     firstName: '',
     lastName: '',
@@ -794,6 +819,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   // ✅ Click to open/close (only one open at a time)
   openVerdictIndex: number | null = 0; // first one open by default
 
+  constructor(private supabase: SupabaseService) {}
+
   ngAfterViewInit() {
     this.howObserver = new IntersectionObserver(
       (entries) => {
@@ -833,8 +860,55 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     this.openVerdictIndex = this.openVerdictIndex === i ? null : i;
   }
 
-  onSubmit() {
-    console.log('Lead submitted', this.model);
+  async onSubmit() {
+    this.submitError = null;
+    this.submitSuccess = false;
+
+    // Basic validation
+    if (
+      !this.model.firstName ||
+      !this.model.lastName ||
+      !this.model.phone ||
+      !this.model.email
+    ) {
+      this.submitError =
+        'Please fill out First Name, Last Name, Phone Number, and Email.';
+      return;
+    }
+
+    this.isSubmitting = true;
+
+    try {
+      await this.supabase.createLead({
+        first_name: this.model.firstName.trim(),
+        last_name: this.model.lastName.trim(),
+        phone_number: this.model.phone.trim(),
+        zip_code: this.model.zip?.trim() || null,
+        email: this.model.email.trim().toLowerCase(),
+        case_type: this.model.caseType || null,
+        description: this.model.description?.trim() || null,
+        consent: !!this.model.consent,
+      });
+
+      this.submitSuccess = true;
+
+      // reset form
+      this.model = {
+        firstName: '',
+        lastName: '',
+        phone: '',
+        zip: '',
+        email: '',
+        caseType: '',
+        description: '',
+        consent: false,
+      };
+    } catch (err: any) {
+      console.error(err);
+      this.submitError =
+        err?.message || 'There was an issue submitting your claim.';
+    } finally {
+      this.isSubmitting = false;
+    }
   }
 }
-
