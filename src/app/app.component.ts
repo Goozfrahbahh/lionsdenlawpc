@@ -22,12 +22,12 @@ type VerdictItem = {
         class="max-w-7xl mx-auto px-6 h-[107px] flex items-center justify-between"
       >
         <!-- LEFT: LOGO PLACEHOLDER -->
-        <div class="flex items-center gap-3">
-          <div
-            class="sm:w-[30px] md:w-[170px] h-[34px] bg-black/10 rounded flex items-center justify-center text-[11px] text-black/60 font-semibold"
-          >
-            LOGO
-          </div>
+        <div class="flex items-center">
+          <img
+            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
+            alt="Lions Den Law P.C."
+            class="h-[48px] md:h-[250px] w-auto object-contain mt-2 -ml-2"
+          />
         </div>
 
         <!-- RIGHT: PHONE -->
@@ -334,7 +334,6 @@ type VerdictItem = {
 
     <!-- ✅ ADD THIS SECTION right before your FOOTER -->
     <section class="w-full bg-[#e9f1ff] py-20" #howItWorksSection>
-
       <div class="max-w-7xl mx-auto px-6">
         <!-- Header -->
         <div class="max-w-3xl">
@@ -423,11 +422,11 @@ type VerdictItem = {
           <!-- LEFT: LOGO + QUICK LINKS -->
           <div class="space-y-4">
             <!-- Logo Placeholder -->
-            <div
-              class="w-[180px] h-[40px] bg-black/10 rounded flex items-center justify-center text-[11px] text-black/60 font-semibold"
-            >
-              LOGO
-            </div>
+            <img
+              src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lionsheader.png"
+              alt="Lions Den Law P.C."
+              class="h-[40px] w-auto object-contain"
+            />
 
             <div class="space-y-2">
               <p class="font-semibold text-[#0b0f16]">Quick Links</p>
@@ -726,7 +725,6 @@ type VerdictItem = {
   `,
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-
   @ViewChild('howItWorksSection', { static: false })
   howItWorksSection!: ElementRef<HTMLElement>;
 
@@ -796,7 +794,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   // ✅ Click to open/close (only one open at a time)
   openVerdictIndex: number | null = 0; // first one open by default
 
-   ngAfterViewInit() {
+  ngAfterViewInit() {
     this.howObserver = new IntersectionObserver(
       (entries) => {
         const entry = entries[0];
