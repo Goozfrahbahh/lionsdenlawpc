@@ -782,6 +782,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     { value: 'Motor Vehicle Accidents', label: 'Motor Vehicle Accidents' },
     { value: 'Slip & Fall / Premises', label: 'Slip & Fall / Premises' },
     { value: 'General Negligence', label: 'General Negligence' },
+    { value: 'Other', label: 'Other' }
   ];
 
   // ✅ Placeholder verdicts (swap later with real data)
