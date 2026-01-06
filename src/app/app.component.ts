@@ -29,7 +29,7 @@ type VerdictItem = {
   <img
     src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/logo_phone.png"
     alt="Lions Den Law"
-    class="h-[60px] w-auto object-contain mt-2 -ml-2 block md:hidden ml-6"
+    class="h-[54px] w-auto object-contain mt-2 -ml-2 block md:hidden ml-6"
   />
 
   <!-- Desktop/Tablet: full header -->
