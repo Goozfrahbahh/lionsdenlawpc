@@ -118,7 +118,7 @@ type VerdictItem = {
             <!-- RIGHT FORM -->
             <div class="w-full">
               <p class="text-[18px] font-semibold text-[#0b0f16]">
-                The Fee Is Free unless we win.
+                Your Fee Comes From Your Victory® – Never Your Pocket
               </p>
 
               <form
@@ -374,7 +374,7 @@ type VerdictItem = {
             class="mt-4 text-[42px] md:text-[54px] leading-[1.05] font-extrabold text-[#0b0f16]"
           >
             It's easy to get started.<br />
-            The Fee Is Free<sup>®</sup>. Only pay if we win.
+            Your Fee Comes From Your Victory<sup>®</sup> – Never Your Pocket
           </h2>
 
           <p class="mt-6 text-[13px] text-slate-500">
