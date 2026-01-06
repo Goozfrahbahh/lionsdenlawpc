@@ -25,12 +25,20 @@ type VerdictItem = {
       >
         <!-- LEFT: LOGO PLACEHOLDER -->
         <div class="flex items-center">
-          <img
-            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
-            alt="Lions Den Law P.C."
-            class="h-[48px] md:h-[250px] w-auto object-contain mt-2 -ml-2"
-          />
-        </div>
+  <!-- Mobile: icon only -->
+  <img
+    src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/TEG_logo.png"
+    alt="Lions Den Law"
+    class="h-[48px] w-auto object-contain mt-2 -ml-2 block md:hidden"
+  />
+
+  <!-- Desktop/Tablet: full header -->
+  <img
+    src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
+    alt="Lions Den Law P.C."
+    class="h-[48px] md:h-[250px] w-auto object-contain mt-2 -ml-2 hidden md:block"
+  />
+</div>
 
         <!-- RIGHT: PHONE -->
         <a
