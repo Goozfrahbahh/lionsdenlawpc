@@ -118,7 +118,7 @@ type VerdictItem = {
             <!-- RIGHT FORM -->
             <div class="w-full">
               <p class="text-[18px] font-semibold text-[#0b0f16]">
-                The Fee Is Free® unless we win.
+                The Fee Is Free unless we win.
               </p>
 
               <form
