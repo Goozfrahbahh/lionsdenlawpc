@@ -7,10 +7,11 @@ import { SupabaseService } from './services/supabase.service';
 type CaseTypeOption = { value: string; label: string };
 
 type VerdictItem = {
+  group: string; // ✅ NEW: "Labor Law Victories" / "Motor Vehicle Accident Result"
   title: string; // "Plaintiff v. Defendant"
   summary: string;
-  amountLabel: string; // "$16.4 Million"
-  resultLabel: string; // "Verdict" / "Settlement"
+  amountLabel: string; // "$1,500,000"
+  resultLabel: string; // "Verdict" / "Settlement" / "Policy Limit Settlement"
   preTrialOfferLabel?: string; // optional
   preTrialOfferValue?: string; // optional
 };
@@ -25,20 +26,20 @@ type VerdictItem = {
       >
         <!-- LEFT: LOGO PLACEHOLDER -->
         <div class="flex items-center">
-  <!-- Mobile: icon only -->
-  <img
-    src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/logo_phone.png"
-    alt="Lions Den Law"
-    class="h-[54px] w-auto object-contain mt-2 -ml-2 block md:hidden ml-6"
-  />
+          <!-- Mobile: icon only -->
+          <img
+            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/TEG_logo.png"
+            alt="Lions Den Law"
+            class="h-[48px] w-auto object-contain mt-2 -ml-2 block md:hidden"
+          />
 
-  <!-- Desktop/Tablet: full header -->
-  <img
-    src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
-    alt="Lions Den Law P.C."
-    class="h-[48px] md:h-[250px] w-auto object-contain mt-2 -ml-2 hidden md:block"
-  />
-</div>
+          <!-- Desktop/Tablet: full header -->
+          <img
+            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
+            alt="Lions Den Law P.C."
+            class="h-[48px] md:h-[250px] w-auto object-contain mt-2 -ml-2 hidden md:block"
+          />
+        </div>
 
         <!-- RIGHT: PHONE -->
         <a
@@ -118,7 +119,7 @@ type VerdictItem = {
             <!-- RIGHT FORM -->
             <div class="w-full">
               <p class="text-[18px] font-semibold text-[#0b0f16]">
-                Your Fee Comes From Your Victory® – Never Your Pocket
+                The Fee Is Free® unless we win.
               </p>
 
               <form
@@ -234,7 +235,7 @@ type VerdictItem = {
 
                   <p
                     *ngIf="submitSuccess"
-                    class="text-[12px] text-green-700 leading-4 text-center mt-2"
+                    class="text-[12px] text-green-700 font-bold leading-4 text-center mt-2"
                   >
                     Thanks — your request has been received. We’ll be in touch
                     shortly.
@@ -297,6 +298,15 @@ type VerdictItem = {
         <div class="mt-14">
           <div class="mx-auto w-full max-w-[500px] space-y-5">
             <div *ngFor="let v of verdicts; let i = index">
+              <!-- ✅ Group header -->
+              <div *ngIf="isGroupStart(i)" class="pt-6 pb-2">
+                <p
+                  class="text-[12px] tracking-widest text-slate-500 font-semibold uppercase"
+                >
+                  {{ v.group }}
+                </p>
+              </div>
+
               <!-- Collapsed: ONLY case name -->
               <button
                 type="button"
@@ -348,10 +358,6 @@ type VerdictItem = {
                       </p>
                     </div>
                   </div>
-
-                  <p class="mt-5 text-[11px] text-slate-500">
-                    * Placeholder we need to add real values later
-                  </p>
                 </div>
               </div>
             </div>
@@ -374,7 +380,7 @@ type VerdictItem = {
             class="mt-4 text-[42px] md:text-[54px] leading-[1.05] font-extrabold text-[#0b0f16]"
           >
             It's easy to get started.<br />
-            Your Fee Comes From Your Victory<sup>®</sup> – Never Your Pocket
+            The Fee Is Free<sup>®</sup>. Only pay if we win.
           </h2>
 
           <p class="mt-6 text-[13px] text-slate-500">
@@ -782,46 +788,37 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     { value: 'Motor Vehicle Accidents', label: 'Motor Vehicle Accidents' },
     { value: 'Slip & Fall / Premises', label: 'Slip & Fall / Premises' },
     { value: 'General Negligence', label: 'General Negligence' },
-    { value: 'Other', label: 'Other' }
   ];
 
-  // ✅ Placeholder verdicts (swap later with real data)
+  // ✅ Real results added
   verdicts: VerdictItem[] = [
     {
-      title: 'Jacob T. Rodgers v. City of Gainesville',
+      group: 'Labor Law Victories',
+      title: 'Mandeep Singh v. City of New York',
       summary:
-        'FAKE DATA: Civil rights and injury claim involving a public entity. Case resolution achieved after extensive motion practice and expert testimony.',
-      amountLabel: '$2.1 Million',
+        "Despite the Attorney General’s office initially valuing the case between $300,000–$500,000, Brandon secured summary judgment on liability, dramatically shifting the leverage in the plaintiff’s favor. This strategic win forced the City to settle within the true value of the claim, resulting in a $1.5 million recovery for the client.",
+      amountLabel: '$1,500,000',
       resultLabel: 'Settlement',
-      preTrialOfferLabel: 'Pre-Suit Offer',
-      preTrialOfferValue: '$45,000',
+      preTrialOfferLabel: 'Initial valuation',
+      preTrialOfferValue: '$300,000–$500,000',
     },
     {
-      title: 'Jessica Long v. The Travelers Home',
+      group: 'Labor Law Victories',
+      title: 'Confidential Plaintiff v. Confidential Defendant',
       summary:
-        'FAKE DATA: Rear-end motor vehicle collision. Significant recovery obtained after beating a low pre-trial offer and presenting strong medical causation evidence.',
-      amountLabel: '$16.4 Million',
-      resultLabel: 'Verdict',
-      preTrialOfferLabel: 'Pre-Trial Offer',
-      preTrialOfferValue: '$16,000',
+        'Defense initially offered $0, citing surveillance of the client lifting 100-pound bags. Through strategic deposition, case development, and legal positioning under New York Labor Law, Brandon overcame liability disputes and credibility attacks — ultimately obtaining a $300,000 settlement for the injured worker.',
+      amountLabel: '$300,000',
+      resultLabel: 'Settlement',
+      preTrialOfferLabel: 'Initial offer',
+      preTrialOfferValue: '$0',
     },
     {
-      title: 'Carol Reed v. Life Care Centers of America',
+      group: 'Motor Vehicle Accident Result',
+      title: 'Jorge Rojas-Bolanos v. Motorist',
       summary:
-        'FAKE DATA: Negligent care case involving major injuries. Resolution reflects accountability and long-term care costs.',
-      amountLabel: '$4.8 Million',
-      resultLabel: 'Settlement',
-      preTrialOfferLabel: 'Pre-Trial Offer',
-      preTrialOfferValue: '$120,000',
-    },
-    {
-      title: 'Parks-Coleman, Shachari v. Thompson, William',
-      summary:
-        'FAKE DATA: Premises liability claim with disputed liability. Recovery obtained after discovery revealed critical maintenance failures.',
-      amountLabel: '$1.35 Million',
-      resultLabel: 'Settlement',
-      preTrialOfferLabel: 'Pre-Suit Offer',
-      preTrialOfferValue: '$25,000',
+        'Brandon secured the full policy limits ($100,000) for a client who sustained injuries requiring surgery following a motor vehicle collision. The case was resolved efficiently by developing strong medical support and maximizing available insurance coverage.',
+      amountLabel: '$100,000',
+      resultLabel: 'Policy Limit Settlement',
     },
   ];
 
@@ -867,6 +864,12 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   toggleVerdict(i: number) {
     this.openVerdictIndex = this.openVerdictIndex === i ? null : i;
+  }
+
+  // ✅ NEW: show category header only when group changes
+  isGroupStart(i: number): boolean {
+    if (i === 0) return true;
+    return this.verdicts[i].group !== this.verdicts[i - 1].group;
   }
 
   async onSubmit() {
