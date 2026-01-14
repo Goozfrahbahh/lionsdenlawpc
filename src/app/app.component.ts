@@ -37,12 +37,12 @@ type AttorneyProfile = {
         class="max-w-8xl mx-auto px-6 h-[107px] flex items-center justify-between"
       >
         <!-- LEFT: LOGO PLACEHOLDER -->
-        <div class="flex items-center">
+       <div class="flex items-center">
           <!-- Mobile: icon only -->
           <img
-            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
+            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/logo_phone.png"
             alt="Lions Den Law"
-            class="h-[180px] w-auto object-contain -ml-8 mt-2 block md:hidden"
+            class="h-[48px] w-auto object-contain ml-8 block md:hidden"
           />
 
           <!-- Desktop/Tablet: full header -->
