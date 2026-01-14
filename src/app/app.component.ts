@@ -37,7 +37,7 @@ type VerdictItem = {
           <img
             src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
             alt="Lions Den Law P.C."
-            class="h-[48px] md:h-[250px] w-auto object-contain mt-2 -ml-2 hidden md:block"
+            class="h-[48px] md:h-[250px] w-auto object-contain mt-3 -ml-2 hidden md:block"
           />
         </div>
 
