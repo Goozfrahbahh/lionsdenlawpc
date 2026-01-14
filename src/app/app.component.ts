@@ -28,16 +28,16 @@ type VerdictItem = {
         <div class="flex items-center">
           <!-- Mobile: icon only -->
           <img
-            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lionsheader.png"
+            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
             alt="Lions Den Law"
-            class="h-[48px] w-auto object-contain ml-2 block md:hidden"
+            class="h-[180px] w-auto object-contain -ml-8 mt-2 block md:hidden"
           />
 
           <!-- Desktop/Tablet: full header -->
           <img
             src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
             alt="Lions Den Law P.C."
-            class="h-[48px] md:h-[250px] w-auto object-contain mt-3 -ml-2 hidden md:block"
+            class="h-[48px] md:h-[250px] w-auto object-contain mt-4 -ml-2 hidden md:block"
           />
         </div>
 
