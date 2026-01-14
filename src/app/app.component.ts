@@ -16,6 +16,18 @@ type VerdictItem = {
   preTrialOfferValue?: string; // optional
 };
 
+type ProfileLink = { label: string; href: string };
+type AttorneyProfile = {
+  name: string;
+  firm: string;
+  title: string;
+  tagline: string;
+  focusAreas: string[];
+  highlights: string[];
+  longBio: string[];
+  links: ProfileLink[];
+};
+
 @Component({
   selector: 'app-root',
   template: `
@@ -52,8 +64,8 @@ type VerdictItem = {
     </header>
 
     <!-- HERO / PANEL -->
-    <section class="w-full bg-whit -mt-5">
-      <div class=" mx-auto py-10">
+    <section class="w-full bg-white -mt-5">
+      <div class="mx-auto py-10">
         <div class="bg-[#e9f1ff] rounded-2xl p-8 md:p-10">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mt-4">
             <!-- LEFT COPY -->
@@ -93,14 +105,16 @@ type VerdictItem = {
                 </div>
 
                 <div class="mt-4 flex flex-wrap items-center gap-3 text-[14px]">
-                  <a
+                  <!-- ✅ Bio button (opens profile popout) -->
+
+                  <!-- Keep your existing external links if you still want them -->
+                  <button
                     class="phone-link font-semibold text-[#0b0f16]"
-                    href="https://ask4sam.net/attorneys/brandon-nunez/"
-                    target="_blank"
+                    (click)="openBio()"
                     rel="noopener noreferrer"
                   >
                     Personal Bio
-                  </a>
+                  </button>
 
                   <span class="text-[#0b0f16]/40">•</span>
 
@@ -119,7 +133,7 @@ type VerdictItem = {
             <!-- RIGHT FORM -->
             <div class="w-full">
               <p class="text-[18px] font-semibold text-[#0b0f16]">
-                You Fee Comes From Your Victory® — Never Your Pocket
+                The Fee Is Free® unless we win.
               </p>
 
               <form
@@ -380,7 +394,7 @@ type VerdictItem = {
             class="mt-4 text-[42px] md:text-[54px] leading-[1.05] font-extrabold text-[#0b0f16]"
           >
             It's easy to get started.<br />
-            You Fee Comes From Your Victory<sup>®</sup>. Never Your Pocket.
+            The Fee Is Free<sup>®</sup>. Only pay if we win.
           </h2>
 
           <p class="mt-6 text-[13px] text-slate-500">
@@ -510,6 +524,110 @@ type VerdictItem = {
       </div>
     </footer>
 
+    <!-- ============================
+         ✅ BIO DRAWER (profile popout)
+         ============================ -->
+    <div
+      class="bio-overlay"
+      *ngIf="bioOpen"
+      (click)="closeBio()"
+      role="presentation"
+    >
+      <aside
+        id="bioDrawer"
+        class="bio-drawer"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="attorneyProfile.name + ' bio'"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="bio-drawer__header">
+          <div class="bio-drawer__identity">
+            <div class="bio-avatar" aria-hidden="true">
+              {{ attorneyInitials }}
+            </div>
+
+            <div class="min-w-0">
+              <p class="text-[18px] font-extrabold text-[#0b0f16] truncate">
+                {{ attorneyProfile.name }}
+              </p>
+              <p class="text-[13px] text-[#0b0f16]/70">
+                {{ attorneyProfile.title }}
+              </p>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="bio-close"
+            (click)="closeBio()"
+            aria-label="Close bio"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div class="bio-drawer__body">
+          <p class="text-[14px] leading-6 text-[#0b0f16]/80">
+            <span class="font-semibold text-[#0b0f16]">
+              {{ attorneyProfile.tagline }}
+            </span>
+          </p>
+
+          <div class="mt-5">
+            <p class="text-[12px] tracking-widest text-slate-500 font-semibold">
+              FOCUS AREAS
+            </p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span
+                *ngFor="let a of attorneyProfile.focusAreas"
+                class="bio-pill"
+              >
+                {{ a }}
+              </span>
+            </div>
+          </div>
+
+          <div class="mt-7">
+            <p class="text-[12px] tracking-widest text-slate-500 font-semibold">
+              HIGHLIGHTS
+            </p>
+            <ul class="mt-3 space-y-2 text-[14px] text-[#0b0f16]/80">
+              <li *ngFor="let h of attorneyProfile.highlights" class="bio-li">
+                <span class="bio-bullet" aria-hidden="true"></span>
+                <span>{{ h }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-7">
+            <p class="text-[12px] tracking-widest text-slate-500 font-semibold">
+              BIO
+            </p>
+            <div class="mt-3 space-y-3 text-[14px] leading-6 text-[#0b0f16]/80">
+              <p *ngFor="let p of attorneyProfile.longBio">{{ p }}</p>
+            </div>
+          </div>
+
+          <div class="mt-7">
+            <p class="text-[12px] tracking-widest text-slate-500 font-semibold">
+              LINKS
+            </p>
+
+            <div class="mt-3 flex flex-wrap gap-2">
+              <a class="bio-link" href="tel:+15122287031">Call</a>
+              <a class="bio-link" href="mailto:bnunez@lionsdenlaw.com">Email</a>
+            </div>
+
+            <p class="mt-4 text-[11px] text-[#0b0f16]/60 leading-4">
+              Attorney advertising. Prior results do not guarantee a similar
+              outcome.
+            </p>
+          </div>
+        </div>
+      </aside>
+    </div>
+
     <!-- Tailwind-ish styles (kept inline via <style> for exact control) -->
     <style>
       /* How It Works cards (white page, cards pop in sequence) */
@@ -542,6 +660,7 @@ type VerdictItem = {
           transition: none;
         }
       }
+
       .footer-link {
         color: rgba(11, 15, 22, 0.75);
         text-decoration: none;
@@ -552,6 +671,7 @@ type VerdictItem = {
         color: rgba(11, 15, 22, 1);
         text-decoration: underline;
       }
+
       .form-field {
         width: 100%;
         height: 48px;
@@ -616,6 +736,28 @@ type VerdictItem = {
         transform: scaleX(1);
       }
 
+      /* ✅ Bio button style (matches your vibe) */
+      .bio-btn {
+        height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(11, 15, 22, 0.18);
+        background: rgba(255, 255, 255, 0.65);
+        font-weight: 800;
+        color: rgba(11, 15, 22, 0.92);
+        box-shadow: 0 10px 22px rgba(11, 15, 22, 0.08);
+        transition: transform 120ms ease, box-shadow 180ms ease,
+          border-color 180ms ease;
+      }
+      .bio-btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(11, 15, 22, 0.28);
+        box-shadow: 0 14px 28px rgba(11, 15, 22, 0.12);
+      }
+      .bio-btn:active {
+        transform: translateY(0px);
+      }
+
       /* Blend panel: looks like a continuation of the hero card */
       .blend-panel {
         width: 100%;
@@ -662,8 +804,8 @@ type VerdictItem = {
       }
 
       /* ===========================
-     VERDICTS (centered 55% + attached reveal)
-     =========================== */
+         VERDICTS (centered 55% + attached reveal)
+         =========================== */
 
       /* Collapsed row: centered and not full width */
       .verdict-row {
@@ -693,15 +835,6 @@ type VerdictItem = {
         justify-content: space-between;
       }
 
-      .verdict-row__chev {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: rgba(11, 15, 22, 0.65);
-        transition: transform 160ms ease;
-        flex-shrink: 0;
-      }
-
       /* Active: pop out + "attach" effect */
       .verdict-row--active {
         transform: translateY(-2px) scale(1.01);
@@ -729,25 +862,6 @@ type VerdictItem = {
         transform: translateY(0px);
       }
 
-      /* Reveal inner matches the same centered width as the row */
-      .verdict-reveal__inner {
-        width: 55%;
-        margin: 0 auto;
-        padding: 0; /* we add padding on the attached panel below */
-      }
-
-      @media (max-width: 1024px) {
-        .verdict-reveal__inner {
-          width: min(92%, 720px);
-        }
-      }
-
-      /* The "same page / attached card" look */
-      .verdict-reveal__inner {
-        width: 100%;
-        margin: 0;
-      }
-
       /* Optional: make detail boxes match the site's card vibe */
       .detail-card {
         border-radius: 14px;
@@ -755,6 +869,153 @@ type VerdictItem = {
         background: rgba(255, 255, 255, 0.8);
         padding: 14px;
         box-shadow: 0 10px 22px rgba(11, 15, 22, 0.08);
+      }
+
+      /* ===========================
+         ✅ BIO DRAWER (profile popout)
+         =========================== */
+      .bio-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: rgba(11, 15, 22, 0.5);
+        backdrop-filter: blur(6px);
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .bio-drawer {
+        width: min(520px, 92vw);
+        height: 100%;
+        background: rgba(248, 249, 252, 0.96);
+        border-left: 1px solid rgba(15, 23, 42, 0.14);
+        box-shadow: -28px 0 60px rgba(11, 15, 22, 0.25);
+        transform: translateX(0);
+        animation: bioSlideIn 180ms ease-out;
+        display: flex;
+        flex-direction: column;
+      }
+
+      @keyframes bioSlideIn {
+        from {
+          transform: translateX(18px);
+          opacity: 0.85;
+        }
+        to {
+          transform: translateX(0px);
+          opacity: 1;
+        }
+      }
+
+      .bio-drawer__header {
+        padding: 18px 18px 14px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(15, 23, 42, 0.1);
+        background: rgba(255, 255, 255, 0.55);
+      }
+
+      .bio-drawer__identity {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        min-width: 0;
+      }
+
+      .bio-avatar {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: rgba(11, 15, 22, 0.92);
+        color: #fff;
+        display: grid;
+        place-items: center;
+        font-weight: 900;
+        letter-spacing: 0.5px;
+        box-shadow: 0 14px 28px rgba(11, 15, 22, 0.16);
+        flex-shrink: 0;
+      }
+
+      .bio-close {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        background: rgba(255, 255, 255, 0.7);
+        font-weight: 900;
+        color: rgba(11, 15, 22, 0.85);
+        transition: transform 120ms ease, box-shadow 180ms ease;
+        box-shadow: 0 10px 22px rgba(11, 15, 22, 0.08);
+      }
+      .bio-close:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 28px rgba(11, 15, 22, 0.12);
+      }
+
+      .bio-drawer__body {
+        padding: 18px;
+        overflow: auto;
+      }
+
+      .bio-li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .bio-bullet {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(11, 15, 22, 0.55);
+        margin-top: 7px;
+        flex-shrink: 0;
+      }
+
+      .bio-pill {
+        display: inline-flex;
+        align-items: center;
+        height: 28px;
+        padding: 0 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(11, 15, 22, 0.14);
+        background: rgba(255, 255, 255, 0.7);
+        color: rgba(11, 15, 22, 0.85);
+        font-weight: 800;
+        font-size: 12px;
+      }
+
+      .bio-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 34px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(11, 15, 22, 0.16);
+        background: rgba(255, 255, 255, 0.7);
+        color: rgba(11, 15, 22, 0.9);
+        font-weight: 800;
+        font-size: 13px;
+        text-decoration: none;
+        box-shadow: 0 10px 22px rgba(11, 15, 22, 0.08);
+        transition: transform 120ms ease, box-shadow 180ms ease;
+      }
+      .bio-link:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 14px 28px rgba(11, 15, 22, 0.12);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .bio-drawer {
+          animation: none;
+        }
+        .bio-link,
+        .bio-close,
+        .bio-btn {
+          transition: none;
+        }
       }
     </style>
   `,
@@ -771,6 +1032,55 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   isSubmitting = false;
   submitSuccess = false;
   submitError: string | null = null;
+
+  // ✅ Bio drawer state
+  bioOpen = false;
+
+  // ✅ Organized bio content (from your pasted bio)
+  attorneyProfile: AttorneyProfile = {
+    name: 'Brandon Andres Nunez',
+    firm: 'Lions Den Law, PC',
+    title: 'Personal Injury Attorney • Trial Advocacy • ADR (Mediation)',
+    tagline: 'Dedicated, results-driven advocacy with courtroom and mediation experience.',
+    focusAreas: [
+      'Personal Injury',
+      'Labor Law',
+      'Trial Advocacy',
+      'Alternative Dispute Resolution',
+      'Bilingual Representation (Spanish)',
+    ],
+    highlights: [
+      'Graduate of Drake University Law School with a practice-oriented foundation in litigation and negotiation.',
+      'Earned top grades in Trial Advocacy, Contract Drafting, and Negotiations; participated in Moot Court client interview team.',
+      'Conducted bench trials, participated in jury trials, and managed matters ranging from criminal defense/prosecution to complex civil disputes.',
+      'ADR training includes 100+ hours of mediation education and nearly 400 mediations completed — a strategic advantage in high-stakes cases.',
+      'Experience includes work with the City of Austin Law Office, Dallas County Attorney’s Office, Drake Legal Clinic, NFP Development, and founding Middle Ground Mediation LLC.',
+      'Fluent Spanish speaker and advocate for bilingual access to legal representation; assists Spanish-speaking clients throughout the process.',
+      'Active in professional organizations including the New York Bar Association, New York Trial Lawyers Association, Latino Lawyers Bar Association of Queens, and National Hispanic Bar Association.',
+    ],
+    longBio: [
+      'Brandon Andres Nunez is a dedicated and results-driven attorney with a strong background in personal injury law, trial advocacy, and alternative dispute resolution. A graduate of Drake University Law School, Brandon brings a well-rounded legal foundation to the firm, shaped by hands-on courtroom experience and a deep commitment to client advocacy.',
+      'While at Drake University Law School, a top practice-oriented program, Brandon distinguished himself through a rigorous curriculum focused on litigation and negotiation, earning top grades in Trial Advocacy, Contract Drafting, and Negotiations. He also participated in the Moot Court client interview team and was an active member of the Hispanic and Latinx Law Student Association and the International Law Society.',
+      'Since entering practice, Brandon has conducted bench trials, actively participated in jury trials, and managed a wide range of cases from misdemeanors/felony criminal matters to complex civil disputes. He is now becoming a lead advocate in the world of Labor Law.',
+      'His training and background in ADR — with over 100 hours of mediation education and nearly 400 mediations completed — provide a strategic advantage in resolving matters efficiently and effectively, especially in high-stakes personal injury cases where quick and fair settlements are paramount.',
+      'Before joining Silberstein & Miklos P.C., Brandon gained experience at the City of Austin Law Office, the Dallas County Attorney’s Office, Drake Legal Clinic, and NFP Development, handling prosecutorial work, criminal defense, municipal law, employment discrimination matters, landlord/tenant disputes, and personal injury cases. He also led civil mediations across Texas as the founder of Middle Ground Mediation LLC.',
+      'In addition to his legal practice, Brandon is a fluent Spanish speaker and a staunch advocate for bilingual access to legal representation. He frequently assists with Spanish-speaking clients, ensuring clear communication and culturally competent service throughout the legal process.',
+      'Outside of practice, Brandon volunteers with Dispute Resolution Centers and remains active in professional organizations, including the New York Bar Association, New York Trial Lawyers Association, Latino Lawyers Bar Association of Queens, and the National Hispanic Bar Association.',
+    ],
+    links: [
+      { label: 'Ask4Sam Profile', href: 'https://ask4sam.net/attorneys/brandon-nunez/' },
+      // Add/replace these as needed:
+      // { label: 'LinkedIn', href: 'https://www.linkedin.com/in/____' },
+      // { label: 'Firm Profile', href: 'https://____' },
+    ],
+  };
+
+  get attorneyInitials(): string {
+    const parts = (this.attorneyProfile?.name || '').trim().split(/\s+/);
+    const first = parts[0]?.[0] || 'B';
+    const last = parts.length > 1 ? parts[parts.length - 1][0] : 'N';
+    return (first + last).toUpperCase();
+  }
 
   model = {
     firstName: '',
@@ -847,10 +1157,26 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     );
 
     this.howObserver.observe(this.howItWorksSection.nativeElement);
+
+    // ✅ Close bio on ESC (nice UX)
+    document.addEventListener('keydown', this.onKeyDown);
   }
 
   ngOnDestroy() {
     this.howObserver?.disconnect();
+    document.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  private onKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && this.bioOpen) this.closeBio();
+  };
+
+  openBio() {
+    this.bioOpen = true;
+  }
+
+  closeBio() {
+    this.bioOpen = false;
   }
 
   private revealHowStepsInSequence() {
