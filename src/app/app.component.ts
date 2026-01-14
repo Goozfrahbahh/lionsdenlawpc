@@ -28,9 +28,9 @@ type VerdictItem = {
         <div class="flex items-center">
           <!-- Mobile: icon only -->
           <img
-            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lions-den-law-logo-header-2x.png"
+            src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/lionsheader.png"
             alt="Lions Den Law"
-            class="h-[48px] w-auto object-contain mt-2 ml-4 block md:hidden"
+            class="h-[48px] w-auto object-contain ml-2 block md:hidden"
           />
 
           <!-- Desktop/Tablet: full header -->
