@@ -34,10 +34,10 @@ type AttorneyProfile = {
     <!-- HEADER -->
     <header class="w-full bg-[#f8f9fc]">
       <div
-        class="max-w-8xl mx-auto px-6 h-[107px] flex items-center justify-between"
+        class="max-w-8xl mx-auto px-6 h-[116px] flex items-center justify-between"
       >
         <!-- LEFT: LOGO PLACEHOLDER -->
-       <div class="flex items-center">
+        <div class="flex items-center">
           <!-- Mobile: icon only -->
           <img
             src="https://poyoniswljtlevoswqcg.supabase.co/storage/v1/object/public/logos/logo_phone.png"
@@ -64,8 +64,8 @@ type AttorneyProfile = {
     </header>
 
     <!-- HERO / PANEL -->
-    <section class="w-full bg-white -mt-5">
-      <div class="mx-auto py-10">
+    <section class="w-full bg-white">
+      <div class="mx-auto py-10 pt-8">
         <div class="bg-[#e9f1ff] rounded-2xl p-8 md:p-10">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mt-4">
             <!-- LEFT COPY -->
