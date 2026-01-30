@@ -55,10 +55,10 @@ type AttorneyProfile = {
 
         <!-- RIGHT: PHONE -->
         <a
-          href="tel:+15122287031"
+          href="tel:+15169046909"
           class="phone-link text-[27px] md:text-[27px] font-extrabold tracking-wide text-black mr-4"
         >
-          (512) 228-7031
+          (516) 904-6909
         </a>
       </div>
     </header>
@@ -133,7 +133,7 @@ type AttorneyProfile = {
             <!-- RIGHT FORM -->
             <div class="w-full">
               <p class="text-[18px] font-semibold text-[#0b0f16]">
-                The Fee Is Free® unless we win.
+                We Only Get Paid When You Do.
               </p>
 
               <form
@@ -394,7 +394,7 @@ type AttorneyProfile = {
             class="mt-4 text-[42px] md:text-[54px] leading-[1.05] font-extrabold text-[#0b0f16]"
           >
             It's easy to get started.<br />
-            The Fee Is Free<sup>®</sup>. Only pay if we win.
+            We Only Get Paid When You Do.
           </h2>
 
           <p class="mt-6 text-[13px] text-slate-500">
@@ -615,7 +615,7 @@ type AttorneyProfile = {
             </p>
 
             <div class="mt-3 flex flex-wrap gap-2">
-              <a class="bio-link" href="tel:+15122287031">Call</a>
+              <a class="bio-link" href="tel:+15169046909">Call</a>
               <a class="bio-link" href="mailto:bnunez@lionsdenlaw.com">Email</a>
             </div>
 
@@ -1041,7 +1041,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     name: 'Brandon Andres Nunez',
     firm: 'Lions Den Law, PC',
     title: 'Personal Injury Attorney • Trial Advocacy • ADR (Mediation)',
-    tagline: 'Dedicated, results-driven advocacy with courtroom and mediation experience.',
+    tagline:
+      'Dedicated, results-driven advocacy with courtroom and mediation experience.',
     focusAreas: [
       'Personal Injury',
       'Labor Law',
