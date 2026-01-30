@@ -56,7 +56,7 @@ type AttorneyProfile = {
         <!-- RIGHT: PHONE -->
         <a
           href="tel:+15169046909"
-          class="phone-link text-[27px] md:text-[27px] font-extrabold tracking-wide text-black mr-4"
+          class="phone-link text-[27px] md:text-[27px] font-extrabold tracking-wide text-black mr-8"
         >
           (516) 904-6909
         </a>
